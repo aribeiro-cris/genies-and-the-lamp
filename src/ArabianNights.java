@@ -1,5 +1,3 @@
-import java.lang.management.ManagementFactory;
-import java.util.Scanner;
 
 public class ArabianNights {
 
@@ -23,50 +21,20 @@ public class ArabianNights {
                     counterLamps++;
                     break;
                 case 2:
-                    int aux = menu1.MenuChooseLamp(counterLamps);
+                    int aux = menu1.MenuChooseLamp(counterLamps); //aux var auxiliary
                     if (aux >= 0) {
                         chosenLamp = aux;
                     }
                     break;
                 case 3:
-                    //menu1.MenuRubLamp();
+                    menu1.MenuRubLamp(magicLamps[chosenLamp]);
                     break;
                 case 4:
-                    //menu1.MenuCompareLamps();
+                    menu1.MenuCompareLamps(counterLamps, magicLamps, chosenLamp);
                     break;
                 default:
                     break;
             }
         }
-
-        MagicLamp magicLamp = new MagicLamp();
-        int genie = magicLamp.isRubbed();
-
-        if(genie == 0) {
-            Demon demon = new Demon();
-            demon.GrantWish();
-            if(!demon.isRecycled()){
-                demon.Recycle();
-                magicLamp.RechargingGenie();
-            }
-        }
-        else if(genie == 1) {
-            GrumpyGenie grumpy = new GrumpyGenie();
-            grumpy.GrantWish();
-            boolean destructionLamp = false;
-            if(!grumpy.isRecycled()) {
-                destructionLamp = grumpy.Recycle();
-                if(destructionLamp == true) {
-                     magicLamp = null;
-                     System.out.println("Lamp destroyed.");
-                } else {
-                    magicLamp.RechargingGenie();
-                }
-            }
-        } else {
-            FriendlyGenie friendlyGenie = new FriendlyGenie();
-            friendlyGenie.GrantWish();
-        }
-
     }
 }

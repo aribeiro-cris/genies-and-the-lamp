@@ -1,4 +1,3 @@
-import java.io.IOException;
 import java.util.Scanner;
 
 public class MenuOptions {
@@ -26,7 +25,7 @@ public class MenuOptions {
     public int MenuChooseLamp(int counterLamps){
         int input = 99;
         System.out.println("*************************************************************");
-        System.out.println("*           Choose a Lamp between 1 - "+ (counterLamps) + "    *");
+        System.out.println("*              Choose a Lamp between 1 - "+ (counterLamps) + "                  *");
         System.out.println("*************************************************************");
         System.out.println("*  0-Back                                                   *");
         System.out.println("*************************************************************");
@@ -45,18 +44,68 @@ public class MenuOptions {
         return input;
     }
 
-    //MenuRubLamp(){
-
-    //}
-
-    public int MenuCompareLamps(int counterLamps){
+    public void MenuRubLamp(MagicLamp magicLamp){
         System.out.println("*************************************************************");
-        System.out.println("Choose 2 Lamps to compare between 1 - " + (counterLamps) +" *");
+        System.out.println("*                   You rubbed the Lamp.                    *");
+        int genie = magicLamp.isRubbed();
+
+        if(genie == 0) {
+            Demon demon = new Demon();
+            System.out.println("*                Bad luck. You got a Demon.                 *");
+
+            demon.GrantWish();
+            if(!demon.isRecycled()){
+                demon.Recycle();
+                magicLamp.RechargingGenie();
+            }
+        }
+        else if(genie == 1) {
+            GrumpyGenie grumpy = new GrumpyGenie();
+            System.out.println("*                 You got a Grumpy Genie.                   *");
+
+
+
+            grumpy.GrantWish();
+            boolean destructionLamp = false;
+            if(!grumpy.isRecycled()) {
+                destructionLamp = grumpy.Recycle();
+                if(destructionLamp == true) {
+                    magicLamp = null;
+                    System.out.println("*          The Grumpy Genie has destroyed the Lamp.         *");
+
+                } else {
+                    magicLamp.RechargingGenie();
+                    System.out.println("*              The Grumpy Genie was recycled.               *");
+                }
+            }
+        } else {
+            FriendlyGenie friendlyGenie = new FriendlyGenie();
+            System.out.println("*             You got a Friendly Genie. Yupi!               *");
+            friendlyGenie.GrantWish();
+        }
+        System.out.println("*************************************************************");
+    }
+
+
+    public int MenuCompareLamps(int counterLamps, MagicLamp[] magicLamps, int chosenLamp){
+        System.out.println("*************************************************************");
+        System.out.println("*       Choose 1 Lamp to compare between 1 - " + (counterLamps) +"              *");
         System.out.println("*************************************************************");
         System.out.println("*************************************************************");
         System.out.println("*  0-Back                                                   *");
         System.out.println("*************************************************************");
-        Scanner scanner= new Scanner(System.in);
 
+        if(counterLamps < 2) {
+            System.out.println("*   Try again, you need to create at least 2 Magic Lamps    *");
+            return 0; //back to menu
+        }
+        Scanner scanner = new Scanner(System.in);
+        int input = scanner.nextInt() - 1;
+        if (magicLamps[input].equals(magicLamps[chosenLamp])){
+            System.out.println("*       Your lamps have the same number of genies.          *");
+        } else {
+            System.out.println("*      Your lamps have a different number of genies.        *");
+        }
+        return 1;
     }
 }

@@ -1,10 +1,10 @@
 <?xml version="1.0" ?>
-<project name="<MagicLamp>" default="jarfile">
+<project name="genies-and-the-lamp" default="jarfile">
 
     <target name="init" description="Initializes properties">
-        <property name="project.name" value="<MagicLamp>" />
+        <property name="project.name" value="genies-and-the-lamp" />
         <property name="src.dir" value="src" />
-        <property name="main.class" value="<ArabianNights>" />
+        <property name="main.class" value="ArabianNights" />
         <property name="build.dir" value="build" />
         <property name="classes.dir" value="${build.dir}/classes" />
     </target>
